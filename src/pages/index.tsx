@@ -19,7 +19,7 @@ export default function Home() {
         <title>insights</title>
         <meta name="description" content="insights by brihadeesh" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon-512x512.png" />
       </Head>
       <main className="h-[100vh] w-[100vw]">
         <Hero />
