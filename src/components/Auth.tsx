@@ -1,9 +1,24 @@
-import { Image } from "@chakra-ui/react";
-import { Button } from "./ui/button";
 import useAuth from "@/backend/useAuth";
+import { Image } from "@chakra-ui/react";
+import React from "react";
+import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 export default function Auth() {
-  const { loading, signInWithGoogle } = useAuth();
+  const { loading, signInWithGoogle, error } = useAuth();
+
+  React.useEffect(() => {
+    if (error) {
+      console.error("Authentication error:", error);
+    }
+  }, [error]);
+
+  const handleSignIn = async () => {
+    const result = await signInWithGoogle();
+    if (result) {
+      toast.success("you have logged in successfully");
+    }
+  };
 
   return (
     <div className="animated-gradient-bg min-h-screen px-10 py-16 flex-col">
@@ -23,7 +38,7 @@ export default function Auth() {
           login with Google to use{" "}
           <span className="font-bold underline italic">insights</span>
         </p>
-        <Button className="w-1/2 text-md" onClick={() => signInWithGoogle()}>
+        <Button className="w-1/2 text-md" onClick={handleSignIn}>
           {loading ? (
             <Spinner />
           ) : (
